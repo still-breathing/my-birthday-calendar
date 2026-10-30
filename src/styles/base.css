@@ -1,0 +1,57 @@
+:root {
+  --bg: #0a090d;
+  --card: #16131f;
+  --ink: #eeeafb;
+  --mute: #a8a2c8;
+  --line: #3b3460;
+  --fam: #a99aff;
+  --adult: #6cb8ff; /* Borora: kept apart from the UI's purple (--fam) */
+  --kid: #4fd3c2;
+  --sun: #f6b94e;
+  --sunbg: #4a3510;
+  --sunink: #ffe3a8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 15px/1.4 Figtree, system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+/* Soft glow behind every screen: purple top-left, Borora blue bottom-right.
+   A fixed layer (not background-attachment: fixed) so it also stays put on iOS. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 10% 0%, rgba(169, 154, 255, 0.18), transparent 45%),
+    radial-gradient(circle at 95% 100%, rgba(108, 184, 255, 0.14), transparent 45%);
+}
+
+/* Screen above, SiteFooter pinned below it. */
+#root {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 3px solid var(--sun);
+  outline-offset: 2px;
+}

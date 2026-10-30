@@ -1,0 +1,1111 @@
+.wrap {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: calc(14px + env(safe-area-inset-top)) 14px calc(28px + env(safe-area-inset-bottom));
+}
+
+.panel {
+  background: var(--card);
+  border: 1.5px solid var(--line);
+  border-radius: 20px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.wrap h1 {
+  font: 800 clamp(1.9rem, 8vw, 2.6rem) / 1 'Bricolage Grotesque', system-ui, sans-serif;
+  letter-spacing: -0.03em;
+  margin: 0 0 6px;
+}
+
+.intro-head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--head-gap);
+}
+
+.intro {
+  --title-size: clamp(1.9rem, 8vw, 2.6rem);
+  --head-gap: 12px;
+}
+
+.intro-head h1 {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--title-size);
+}
+
+/* Orbiting logo before the family name, as tall as the lettering: from the top
+   of the capitals (0.76em above the baseline) to the bottom of the "y" (0.2em
+   below). The -0.05em bottom margin keeps it inside the line so the panel's
+   height doesn't change; vertical-align then puts its bottom at -0.2em. */
+.title-logo {
+  width: 0.96em;
+  height: 0.96em;
+  margin: 0 0.22em -0.05em 0;
+  vertical-align: -0.15em;
+}
+
+/* Round header buttons; same surface as the row .x pills, primary matches .add. */
+.tools {
+  position: relative;
+  flex-shrink: 0;
+}
+
+@media (max-width: 520px) {
+
+  /* Fit logo + "My Family Birthdays" (10.9× the font size) on one line beside the
+     menu button: the title gets 100vw minus 106px of page, panel and button. */
+  .intro {
+    --head-gap: 8px;
+    --title-size: min(clamp(1.6rem, 7.4vw, 2.6rem), calc((100vw - 106px) / 10.95));
+  }
+}
+
+.tool {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 99px;
+  border: 1.5px solid var(--line);
+  background: #261f3d;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  color: var(--ink);
+}
+
+.tool:hover {
+  border-color: var(--fam);
+}
+
+.tool.primary {
+  border-color: var(--fam);
+  background: var(--fam);
+  color: var(--bg);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
+}
+
+.tool:disabled {
+  opacity: 0.6;
+}
+
+.tool svg {
+  width: 18px;
+  height: 18px;
+}
+
+.tool-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 20;
+  min-width: 220px;
+  max-width: calc(100vw - 48px);
+  padding: 6px;
+  border-radius: 14px;
+  border: 1.5px solid var(--line);
+  background: var(--card);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+}
+
+.tool-menu-head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 10px 10px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.88rem;
+  overflow-wrap: anywhere;
+}
+
+.tool-menu-head small {
+  color: var(--mute);
+  font-size: 0.75rem;
+}
+
+.tool-menu-about {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+  padding: 10px 10px 6px;
+  border-top: 1px solid var(--line);
+  font-size: 0.9rem;
+}
+
+.tool-menu-about span {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tool-menu-about small {
+  color: var(--mute);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.tool-menu-about i {
+  font-style: normal;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 99px;
+}
+
+.tool-menu-about i.dev {
+  background: var(--sunbg);
+  color: var(--sunink);
+}
+
+.tool-menu-about i.prod {
+  background: rgba(79, 211, 194, 0.15);
+  color: var(--kid);
+}
+
+.tool-menu button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 10px;
+  border: 0;
+  border-radius: 9px;
+  background: none;
+  color: var(--ink);
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.tool-menu button:hover,
+.tool-menu button:focus-visible {
+  background: #261f3d;
+}
+
+.tool-menu svg {
+  width: 18px;
+  height: 18px;
+  color: var(--mute);
+}
+
+.intro p {
+  color: var(--mute);
+  /* 6px more space under the title, taken from below so the panel keeps its height. */
+  margin: 6px 0 4px;
+  /* Starts under the logo; stops short of the menu button's column (36px + gap). */
+  padding-right: calc(36px + var(--head-gap));
+}
+
+.legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--mute);
+}
+
+.legend i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  background: var(--adult);
+}
+
+.legend .k i {
+  background: var(--kid);
+}
+
+.legend .t i {
+  background: var(--sun);
+}
+
+/* The wheel's panel keeps its padding tight so the ring can be bigger. */
+.panel.wheel {
+  padding-top: 6px;
+  padding-bottom: 10px;
+}
+
+.ringwrap {
+  position: relative;
+  /* As big as the panel allows, but never taller than the window can show
+     under the header: 205px = header and gaps above (167) + legend and
+     padding below (34) + breathing room (4). At least 280px, e.g. on a
+     landscape phone. The centre text scales with it via container units. */
+  width: min(100%, max(280px, calc(100vh - 205px)));
+  width: min(100%, max(280px, calc(100dvh - 205px)));
+  aspect-ratio: 1;
+  margin: 0 auto;
+  container-type: inline-size;
+}
+
+.ringwrap svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  touch-action: manipulation;
+}
+
+.rim {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1.5;
+}
+
+.core {
+  fill: var(--card);
+  stroke: var(--line);
+}
+
+.tick {
+  stroke: var(--line);
+  stroke-width: 1.5;
+}
+
+.mo {
+  cursor: pointer;
+  outline: none;
+}
+
+.mo text {
+  fill: var(--mute);
+  font: 600 12px Figtree, sans-serif;
+}
+
+.mo:hover text,
+.mo.on text,
+.mo:focus-visible text {
+  fill: var(--ink);
+}
+
+.mo .hit {
+  fill: transparent;
+}
+
+.mo.on .hit,
+.mo:focus-visible .hit {
+  fill: var(--line);
+}
+
+.today {
+  stroke: var(--sun);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.tdot {
+  fill: var(--sun);
+}
+
+.dotg {
+  cursor: pointer;
+  outline: none;
+  transition: opacity 0.2s;
+}
+
+.dotg.dim {
+  opacity: 0.14;
+  pointer-events: none;
+}
+
+/* Filtered-out dots shrink back rather than vanish (month spotlight). */
+.dotg .dot {
+  transition:
+    r 0.15s,
+    transform 0.35s ease-out;
+}
+
+.dotg.dim .dot {
+  transform: scale(0.6);
+}
+
+/* Month spotlight: the picked month's slice of the rim glows. */
+.spot {
+  fill: none;
+  stroke: var(--fam);
+  stroke-width: 10;
+  stroke-linecap: round;
+  opacity: 0.32;
+  animation: spot-in 0.4s ease-out;
+}
+
+/* Hover glow: a fainter preview of the month spotlight. */
+.spot.peek {
+  opacity: 0.16;
+  animation-duration: 0.2s;
+}
+
+/* Year-so-far comet trail: faint at 1 January, brightest at today. It draws
+   in on load through the mask below, then stays. */
+.year {
+  /* Night to amber: starts the colour of the ring line, warms to a sunrise
+     amber at today. */
+  --trail-from: var(--line);
+  --trail-to: #ffb86b;
+}
+
+.year path {
+  fill: none;
+  stroke-width: 5;
+}
+
+.year-reveal {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 12;
+  stroke-dasharray: 1;
+  animation: year-draw 1.2s cubic-bezier(0.2, 0.7, 0.3, 1) 0.2s backwards;
+}
+
+@keyframes year-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+
+@keyframes spot-in {
+  from {
+    opacity: 0;
+    stroke-width: 2;
+  }
+}
+
+.tap {
+  fill: transparent;
+}
+
+.dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  /* Clockwise bloom on load: each dot pops in by its day of the year. */
+  animation: pop 0.5s backwards;
+  animation-delay: calc(var(--d) * 4ms);
+}
+
+/* Birthdays in the next 30 days twinkle once the bloom is over, and rest
+   while a sweep runs. */
+.dot.soon {
+  animation:
+    pop 0.5s backwards,
+    twinkle 2.4s ease-in-out infinite;
+  animation-delay: calc(var(--d) * 4ms), 2.2s;
+}
+
+.sweeping .dot.soon {
+  animation: pop 0.5s backwards;
+  animation-delay: calc(var(--d) * 4ms);
+}
+
+/* Dots flash as the sweep pointer passes them. */
+.sweeping .dot.swept {
+  animation: swept 0.45s ease-out;
+}
+
+@keyframes twinkle {
+  50% {
+    transform: scale(1.35);
+  }
+}
+
+@keyframes swept {
+  40% {
+    transform: scale(1.7);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot,
+  .dot.soon,
+  .spot,
+  .year-reveal {
+    animation: none;
+  }
+}
+
+.dot.a {
+  fill: var(--adult);
+}
+
+.dot.k {
+  fill: var(--kid);
+}
+
+.dotg:hover .dot,
+.dotg:focus-visible .dot {
+  r: 7;
+  stroke: var(--sun);
+  stroke-width: 3;
+}
+
+.dot.next {
+  stroke: var(--sun);
+  stroke-width: 3;
+}
+
+/* Ring around the dot of the person picked from the list. */
+.halo {
+  fill: none;
+  stroke: var(--sun);
+  stroke-width: 2.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: halo 1.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes halo {
+  50% {
+    transform: scale(1.35);
+    opacity: 0.45;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .halo {
+    animation: none;
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+.center {
+  position: absolute;
+  /* The inner circle (r=100) within the cropped 364-unit viewBox: 82/364. */
+  inset: 22.53%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+.center small {
+  color: var(--mute);
+  font-size: clamp(0.72rem, 2.8cqi, 0.95rem);
+}
+
+.center strong {
+  font: 800 clamp(1.05rem, 5.6cqi, 1.95rem) / 1.1 'Bricolage Grotesque', system-ui, sans-serif;
+  text-wrap: balance;
+  margin: 3px 0;
+}
+
+.center span {
+  color: var(--mute);
+  font-size: clamp(0.8rem, 3.1cqi, 1.05rem);
+}
+
+.center b {
+  margin-top: 6px;
+  padding: 2px 11px;
+  border-radius: 99px;
+  background: var(--sunbg);
+  color: var(--sunink);
+  font-size: clamp(0.75rem, 2.9cqi, 0.98rem);
+}
+
+.bar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.search-box {
+  position: relative;
+  min-width: 0;
+}
+
+.search-box svg {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  width: 17px;
+  height: 17px;
+  transform: translateY(-50%);
+  color: var(--mute);
+  pointer-events: none;
+}
+
+.search {
+  width: 100%;
+  min-width: 0;
+  padding: 9px 12px 9px 36px;
+  border-radius: 12px;
+  border: 1.5px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 16px; /* 16px stops iOS zooming on focus */
+}
+
+.add svg {
+  width: 17px;
+  height: 17px;
+}
+
+.segs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.segs .seg {
+  flex: 1 1 auto;
+}
+
+.seg {
+  display: flex;
+  background: var(--card);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 3px;
+}
+
+.seg button {
+  flex: 1;
+  border: 0;
+  background: none;
+  padding: 5px 7px;
+  border-radius: 9px;
+  color: var(--mute);
+  font-weight: 600;
+  font-size: 0.84rem;
+  white-space: nowrap;
+}
+
+.seg button[aria-pressed='true'] {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.add {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
+  border: 0;
+  background: var(--fam);
+  color: var(--bg);
+  padding: 0 16px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+/* One swipeable row of month chips; fades at the edges to hint at more. */
+.months {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+  padding: 2px 2px 8px;
+  margin: 8px -2px 8px;
+  --fade-l: 0px;
+  --fade-r: 0px;
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 var(--fade-l),
+    #000 calc(100% - var(--fade-r)),
+    transparent
+  );
+}
+
+.months.more-l {
+  --fade-l: 18px;
+}
+
+.months.more-r {
+  --fade-r: 18px;
+}
+
+.months::-webkit-scrollbar {
+  height: 6px;
+}
+
+.months::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 99px;
+}
+
+.months button {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  scroll-snap-align: center;
+  border: 1.5px solid var(--line);
+  background: #1d1830;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  padding: 6px 8px 6px 12px;
+  border-radius: 99px;
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.months button small {
+  min-width: 20px;
+  padding: 1px 6px;
+  border-radius: 99px;
+  background: #2a2346;
+  color: var(--mute);
+  font-size: 0.72rem;
+  text-align: center;
+}
+
+.months button.none {
+  color: var(--mute);
+  font-weight: 400;
+}
+
+.months button[aria-pressed='true'] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+}
+
+.months button[aria-pressed='true'] small {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* Not sticky: pages are short, and a solid strip would cut through the background glow. */
+.mh {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 10px 0 4px;
+  border-bottom: 1.5px solid var(--line);
+}
+
+.mh h2 {
+  font: 800 1.2rem 'Bricolage Grotesque', system-ui, sans-serif;
+  margin: 0;
+}
+
+.mh span {
+  color: var(--mute);
+  font-size: 0.8rem;
+}
+
+.row {
+  --c: var(--adult);
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  margin: 6px 0;
+  background: var(--card);
+  border: 1.5px solid var(--line);
+  border-left: 5px solid var(--c);
+  border-radius: 12px;
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.row.k {
+  --c: var(--kid);
+}
+
+.row {
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.row:hover {
+  border-color: color-mix(in srgb, var(--c) 45%, var(--line));
+}
+
+/* The row whose dot is highlighted on the wheel. */
+.row.on {
+  border-color: var(--sun);
+  border-left-color: var(--c);
+}
+
+.row .d {
+  font: 800 1.45rem / 1 'Bricolage Grotesque', system-ui, sans-serif;
+  text-align: center;
+  color: var(--c);
+}
+
+.row .d small {
+  display: block;
+  font: 600 0.68rem Figtree, sans-serif;
+  margin-top: 1px;
+}
+
+.row .n {
+  font-weight: 600;
+  color: var(--c);
+  overflow-wrap: anywhere;
+}
+
+.row .s {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 8px;
+  font-size: 0.8rem;
+  color: var(--c);
+}
+
+.row .s > span:first-child,
+.row .s .note {
+  opacity: 0.75;
+}
+
+.row .s .note::before {
+  content: '· ';
+}
+
+.badge {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--c);
+  white-space: nowrap;
+}
+
+.badge.soon {
+  background: color-mix(in srgb, var(--c) 22%, transparent);
+  padding: 1px 8px;
+  border-radius: 99px;
+  font-weight: 600;
+}
+
+.x {
+  border: 1.5px solid var(--line);
+  background: #261f3d;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 99px;
+}
+
+.x:hover {
+  border-color: var(--fam);
+}
+
+.x svg {
+  width: 15px;
+  height: 15px;
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 12px 0 4px;
+  color: var(--mute);
+  font-size: 0.85rem;
+}
+
+.pager button {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0 0 2px;
+  border-radius: 99px;
+  border: 1.5px solid var(--line);
+  background: #261f3d;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  color: var(--ink);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.pager button:hover:not(:disabled) {
+  border-color: var(--fam);
+}
+
+.pager button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.empty {
+  padding: 28px 0;
+  color: var(--mute);
+  text-align: center;
+}
+
+.site-foot {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 14px 14px calc(18px + env(safe-area-inset-bottom));
+}
+
+/* A card-coloured pill so the text reads clearly over the grid background. */
+.site-foot > div {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 6px 14px 6px 10px;
+  border-radius: 99px;
+  border: 1.5px solid var(--line);
+  background: var(--card);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+  color: var(--mute);
+  font-size: 0.8rem;
+}
+
+@media (max-width: 480px) {
+  .site-foot > div {
+    flex: 1;
+    justify-content: center;
+    row-gap: 2px;
+    border-radius: 14px;
+    padding: 8px 12px;
+  }
+
+  .site-foot .sep {
+    display: none;
+  }
+
+  .site-foot a {
+    flex-basis: 100%;
+    text-align: center;
+  }
+}
+
+/* Logo with orbiting dots: one quick lap on arrival, then a slow drift. */
+.logo-orbit {
+  overflow: visible; /* the big dot just touches the edge at some angles */
+}
+
+.logo-orbit .logo-dots {
+  transform-box: view-box;
+  transform-origin: 16px 16px;
+  animation:
+    logo-lap 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+    logo-lap 40s linear 1.4s infinite;
+}
+
+@keyframes logo-lap {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-orbit .logo-dots {
+    animation: none;
+  }
+}
+
+.site-foot svg {
+  width: 20px;
+  height: 20px;
+}
+
+.site-foot a {
+  color: var(--fam);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.site-foot a:hover {
+  color: var(--ink);
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.65);
+  padding: 16px;
+}
+
+.sheet {
+  border: 1.5px solid var(--line);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+  border-radius: 18px;
+  background: var(--card);
+  color: var(--ink);
+  padding: 20px;
+  width: min(100%, 360px);
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.sheet h3 {
+  margin: 0 0 12px;
+  font: 800 1.3rem 'Bricolage Grotesque', system-ui, sans-serif;
+}
+
+.sheet label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.88rem;
+  color: var(--mute);
+}
+
+.sheet input,
+.sheet select {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 9px;
+  border-radius: 10px;
+  border: 1.5px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  font: inherit;
+  font-size: 16px; /* 16px stops iOS zooming on focus */
+}
+
+.two {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 10px;
+}
+
+.sheet .chk {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.sheet .chk input {
+  width: auto;
+  margin: 0;
+}
+
+.sheet fieldset.plain {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.sheet fieldset:disabled input,
+.sheet fieldset:disabled select {
+  opacity: 0.75;
+}
+
+.hint {
+  color: var(--mute);
+  font-size: 0.85rem;
+  margin: 0 0 8px;
+}
+
+.sheet h4 {
+  margin: 14px 0 6px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--mute);
+}
+
+.rows {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+}
+
+.rows li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.9rem;
+}
+
+.rows li > span {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.rows small {
+  color: var(--mute);
+}
+
+.rows button {
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1.5px solid var(--line);
+  background: none;
+  color: #ff9b9b;
+  font-size: 0.8rem;
+}
+
+.err {
+  color: #ff9b9b;
+  font-size: 0.85rem;
+  margin: 0 0 8px;
+}
+
+.acts {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+
+.acts button {
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--line);
+  background: none;
+}
+
+.acts .go {
+  background: var(--fam);
+  color: var(--bg);
+  border-color: var(--fam);
+  font-weight: 600;
+}
+
+.acts .del {
+  margin-right: auto;
+  color: #ff9b9b;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
